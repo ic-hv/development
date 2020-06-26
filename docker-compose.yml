@@ -1,68 +1,39 @@
-version: '3.7'
-
-networks:
-    shopware:
+version: "3"
 
 services:
-  app_server:
-    image: shopware/development:7.4-composer-2
-    networks:
-      shopware:
-        aliases:
-          - docker.vm
-    extra_hosts:
-      - "docker.vm:127.0.0.1"
-    volumes:
-      - ~/.composer:/.composer
-    tmpfs:
-      - /tmp:mode=1777
 
-  app_mysql:
-    build: dev-ops/docker/containers/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: app
-      MYSQL_PASSWORD: app
-    networks:
-      shopware:
-        aliases:
-          - mysql
+    shopware6-latest:
+      image: dockware/dev:latest
+      container_name: shopware6-latest
+      ports:
+         - "80:80"
+         - "3306:3306"
+         - "2222:22"
+         - "8888:8888"
+         - "9999:9999"
+      volumes:
+         - "dw_latest-db_volume-sw:/var/lib/mysql"
+         - "dw_latest-shop_volume-sw:/var/www/html"
 
-  cypress:
-    image: cypress/included:5.6.0
-    tty: true
-    ipc: host
-    environment:
-      - CYPRESS_baseUrl=http://docker.vm:8000
-      - DISPLAY
-    networks:
-      shopware:
-    volumes:
-      - ./vendor/shopware/platform/src/Storefront/Resources/app/storefront/test/e2e:/e2e-Storefront
-      - ./vendor/shopware/platform/src/Administration/Resources/app/administration/test/e2e:/e2e-Administration
-      # for Cypress to communicate with the X11 server pass this socket file
-      # in addition to any other mapped volumes
-      - /tmp/.X11-unix:/tmp/.X11-unix
-    entrypoint: /bin/bash
+#         - ".:/var/www/html" # mount bind
 
-  mailhog:
-    image: mailhog/mailhog
-    networks:
-      shopware:
-        aliases:
-          - mailhog
+#         - "heiko_db_volume-sw:/var/lib/mysql"
+#         - "heiko_shop_volume-sw:/var/www/html"
+      networks:
+         - web
+      environment:
+         - XDEBUG_ENABLED=1
+volumes:
+  dw_latest-db_volume-sw:
+    driver: local
+  dw_latest-shop_volume-sw:
+    driver: local
 
-  adminer:
-    image: adminer:latest
-    networks:
-      shopware:
+#  heiko_db_volume-sw:
+#    external: true
+#  heiko_shop_volume-sw:
+#    external: true
 
-  elasticsearch:
-    image: elastic/elasticsearch:7.1.1
-    networks:
-        shopware:
-            aliases:
-                - elasticsearch
-    environment:
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - discovery.type=single-node
+networks:
+  web:
+    external: false

@@ -8,8 +8,8 @@ INCLUDE: ./cache.sh
 INCLUDE: ./init-composer.sh
 INCLUDE: ./init-database.sh
 INCLUDE: ./init-shopware.sh
-INCLUDE: ./init-test-databases.sh
-INCLUDE: ./demo-data.sh
+#INCLUDE: ./init-test-databases.sh
+#INCLUDE: ./demo-data.sh
 INCLUDE: ../../administration/actions/init.sh
 INCLUDE: ../../storefront/actions/init.sh
 bin/console assets:install
