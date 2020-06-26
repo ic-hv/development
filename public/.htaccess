@@ -1,3 +1,9 @@
+# ohne xDebug
+#Action application/x-httpd-php /php-fpm-7-3-6
+
+# mit xDebug
+#Action application/x-httpd-php /php-fpm-7-3-11
+
 DirectoryIndex index.php
 
 <IfModule mod_negotiation.c>

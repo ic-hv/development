@@ -12,8 +12,8 @@ bin/console scheduled-task:register
 
 bin/console plugin:refresh
 
-bin/console user:create admin --password=shopware --admin
-
-bin/console sales-channel:create:storefront --url='__APP_URL__'
-
-bin/console theme:refresh
+#bin/console user:create admin --password=shopware --admin
+#
+#bin/console sales-channel:create:storefront --url='__APP_URL__'
+#
+#bin/console theme:refresh

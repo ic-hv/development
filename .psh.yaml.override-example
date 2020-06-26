@@ -1,0 +1,20 @@
+header: |
+  Heiko's SHOPWARE Developer Version
+
+         _
+        | |
+     ___| |__   ___  _ ____      ____ _ _ __ ___
+    / __| '_ \ / _ \| '_ \ \ /\ / / _` | '__/ _ \
+    \__ \ | | | (_) | |_) \ V  V / (_| | | |  __/
+    |___/_| |_|\___/| .__/ \_/\_/ \__,_|_|  \___|
+                    | |
+                    |_|          Example OVERRIDE
+
+const:
+  DB_USER: "heiko"
+  DB_PASSWORD: "b1rdC4g3XyZA0C"
+  DB_HOST: "127.0.0.1"
+  DB_NAME: "heiko_shopware6_mac"
+  APP_URL: "https://heiko-mac.shopware.intercorp.local"
+  APP_ENV: "dev"
+  APP_MAILER_URL: "smtp://mailhog:1025"
